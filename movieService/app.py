@@ -31,7 +31,6 @@ def getMovieById(id):
     try:
         if id is None:
             return jsonify({'error': 'No movie id provided'})
-        print(os.getenv('TOKEN_TMDB_API'))
         url = f'https://api.themoviedb.org/3/movie/{id}?language=en-US';
         headers = {
                 "accept": "application/json",
@@ -39,9 +38,8 @@ def getMovieById(id):
             }
 
         response = requests.get(url, headers=headers)
-        print(response)
         response.raise_for_status()
-        movie_data = response.json()
+        movie_data = response.json()    
 
         movie = {
             "id": movie_data.get("id"),
@@ -60,11 +58,13 @@ def getMovieById(id):
                 if movie_data.get("production_companies") and len(movie_data["production_companies"]) > 0
                 else "Unknown"
             ),
-            "emptyStars": [0] * (5 - (movie_data.get("vote_average", 0) // 2)),
-            "fullStars": [0] * (movie_data.get("vote_average", 0) // 2),
+            "emptyStars": [0] * int((5 - (movie_data.get("vote_average", 0) // 2))),
+            "fullStars": [0] * int((movie_data.get("vote_average", 0) // 2)),
             "hasHalfStar": bool(movie_data.get("vote_average", 0) % 2),
             "vote_average": movie_data.get("vote_average"),
         }
+
+        return jsonify(movie), 200
     except Exception as e:
         return jsonify({'error': str(e)}), 500
 
@@ -163,4 +163,5 @@ def updateStatus(movieId):
     except Exception as e:
         return jsonify({'error': str(e)}), 500
 
-
+if __name__ == '__main__':
+    app.run(debug=True, port=8002)
