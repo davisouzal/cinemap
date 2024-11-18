@@ -1,24 +1,20 @@
 # Cinemap
 
-O cinemao é um projeto que consiste em um gerenciador de filmes, onde iremos fornecer para o usuário uma forma dele organizar seus filmes. O sistema pode oferecer uma lista de filmes e um sistema de pesquisa para o usuário definir se ele pretende assistir, se ele assistiu o filme ou se ele desistiu de assistir o filme.
+O cinemap é um projeto que consiste em um gerenciador de filmes, onde iremos fornecer para o usuário uma forma dele organizar seus filmes. O sistema pode oferecer uma lista de filmes e um sistema de pesquisa para o usuário definir se ele pretende assistir, se ele assistiu o filme ou se ele desistiu de assistir o filme.
 Esse sistema também recomenda os filmes baseados na pesquisa que o usuário fez e nos históricos de filmes do usuário.
 
 
 ## Requisitos
 - Python 3.8 ou superior
-- Flask
-- SQLAlchemy
-- Flask-Migrate
-- Flask-CORS
-- Requests
-- Dotenv
 - Docker
+- NodeJs
+
 
 ## Instruções para Instalação
 1. Clone o repositório
 ```
-git clone https://github.com/seu-usuario/cinemap-backend.git
-cd cinemap-backend/movieService
+git clone https://github.com/davisouzal/cinemap.git
+cd cinemap/movieService
 ```
 2. Crie um ambiente virtual (recomendado)
 
@@ -61,6 +57,8 @@ Para iniciar o servidor Flask, execute:
 flask run -p {porta}
  ```
 Isso iniciará o servidor na porta descrita. Acesse a aplicação em ```http://127.0.0.1:{porta}```. Faça esse processo tanto para o serviço de autenticação quanto para o de filmes.
+
+Para a parte de *auth*, rode na porta ```3001``` e para a parte de *movies* rode na porta ```3002```.
 
 Já para rodar o serviço de recomendação basta rodar o docker com o comando:
 ```sh
@@ -325,3 +323,22 @@ docker compose up # adicione a tag -d em caso de querer rodar em segundo plano
   4444
 ]
 ```
+
+## 🚀 How to run (Front)
+
+To run this in your local machine, clone this repo and run the command:
+
+```sh
+  cd front
+  # Installing dependencies
+  npm install or yarn
+```
+
+installing all dependencies. After that, just start:
+
+```sh
+  # Starting project
+  npm start or yarn start
+```
+
+And it will appear on `http://localhost:3000`.
