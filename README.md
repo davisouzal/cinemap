@@ -324,9 +324,9 @@ docker compose up # adicione a tag -d em caso de querer rodar em segundo plano
 ]
 ```
 
-## 🚀 How to run (Front)
+## 🚀 Como rodar (Front)
 
-To run this in your local machine, clone this repo and run the command:
+Para rodar isso na sua máquina local, clone este repositório e execute o comando:
 
 ```sh
   cd front
@@ -334,11 +334,11 @@ To run this in your local machine, clone this repo and run the command:
   npm install or yarn
 ```
 
-installing all dependencies. After that, just start:
+Isso instalará todas as dependências. Depois disso, basta iniciar:
 
 ```sh
   # Starting project
   npm start or yarn start
 ```
 
-And it will appear on `http://localhost:3000`.
+E ele aparecerá em `http://localhost:3000`.
