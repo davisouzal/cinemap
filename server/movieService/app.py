@@ -112,6 +112,8 @@ def addUserMovie(tmdbId):
         if foundMovie:
             return jsonify({'error': 'Movie already exists'}), 400
         
+        print(data)
+        
         newMovie = Movie(tmdb_id=tmdbId, status=status, userId=userId)
         db.session.add(newMovie)
         db.session.commit()

@@ -14,7 +14,7 @@ Esse sistema também recomenda os filmes baseados na pesquisa que o usuário fez
 1. Clone o repositório
 ```
 git clone https://github.com/davisouzal/cinemap.git
-cd cinemap/movieService
+cd cinemap/server/movieService
 ```
 2. Crie um ambiente virtual (recomendado)
 

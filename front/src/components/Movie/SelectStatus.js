@@ -16,13 +16,13 @@ export default function SelectStatus({ token, toast, title, tmdbId, movie, movie
   async function saveMovie(movie) {
     const id = localStorage.getItem("id");
 
-    const response = await fetch(`http://localhost:3002/users/movies/${tmdbId}`, {
+    const response = await fetch(`http://localhost:3002/users/movies/${tmdbId}?userId=${id}`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
         Authorization: `Bearer ${token}`,
       },
-      body: JSON.stringify({ status: "plan", userId: id }),
+      body: JSON.stringify({ status: "plan" }),
     });
 
     if (response.status !== 201) {
