@@ -1,6 +1,8 @@
-# Cinemap - Backend
+# Cinemap
 
-Este é o backend da aplicação Cinemap, responsável por gerenciar informações sobre filmes e usuários, utilizando Flask e SQLAlchemy. A aplicação é dividida em microserviços para maior escalabilidade e organização.
+O cinemao é um projeto que consiste em um gerenciador de filmes, onde iremos fornecer para o usuário uma forma dele organizar seus filmes. O sistema pode oferecer uma lista de filmes e um sistema de pesquisa para o usuário definir se ele pretende assistir, se ele assistiu o filme ou se ele desistiu de assistir o filme.
+Esse sistema também recomenda os filmes baseados na pesquisa que o usuário fez e nos históricos de filmes do usuário.
+
 
 ## Requisitos
 - Python 3.8 ou superior
