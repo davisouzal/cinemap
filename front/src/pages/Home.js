@@ -64,7 +64,7 @@ export default function Home() {
 
       if (completedIds.length > 0) {
         completedIds.forEach(async (movie) => {
-          const movieData = await getMovie(movie.tmdbId);
+          const movieData = await getMovie(movie.tmdb_id);
           setCompleted((completed) => [...completed, movieData]);
           setMovies((movies) => [...movies, movieData]);
         });
@@ -73,7 +73,6 @@ export default function Home() {
     }
 
     async function getDroppedMovies() {
-      console.log("dropped");
       if (dropped.length > 0) {
         return setMovies(dropped);
       }
@@ -92,7 +91,7 @@ export default function Home() {
 
       if (droppedIds.length > 0) {
         droppedIds.forEach(async (movie) => {
-          const movieData = await getMovie(movie.tmdbId);
+          const movieData = await getMovie(movie.tmdb_id);
           setDropped((dropped) => [...dropped, movieData]);
           setMovies((movies) => [...movies, movieData]);
         });
@@ -118,7 +117,7 @@ export default function Home() {
 
       if (planIds.length > 0) {
         planIds.forEach(async (movie) => {
-          const movieData = await getMovie(movie.tmdbId);
+          const movieData = await getMovie(movie.tmdb_id);
           setPlan((plan) => [...plan, movieData]);
           setMovies((movies) => [...movies, movieData]);
         });

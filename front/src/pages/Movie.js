@@ -42,7 +42,8 @@ export default function Movie() {
   };
 
   async function saveRating() {
-    const response = await fetch(`http://localhost:3002/users/movies/${movieId}`, {
+    const id = localStorage.getItem("id");
+    const response = await fetch(`http://localhost:3002/users/movies/${movieId}?userId=${id}`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
@@ -52,6 +53,8 @@ export default function Movie() {
     });
 
     await response.json();
+
+    console.log(await response.json());
 
     if (response.status === 200) {
       toast.current.show({
@@ -71,8 +74,9 @@ export default function Movie() {
   }
 
   useEffect(() => {
+    const id = localStorage.getItem("id");
     async function getMovieStatus() {
-      const response = await fetch(`http://localhost:3002/users/movies/${tmdbId}`, {
+      const response = await fetch(`http://localhost:3002/users/movies/${tmdbId}?userId=${id}`, {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
@@ -87,6 +91,7 @@ export default function Movie() {
 
       try {
         const data = await response.json();
+        console.log(data);
         setMovieStatus(data.status);
         setMovieId(data.id);
         setRating(data.rating);
@@ -99,8 +104,9 @@ export default function Movie() {
   }, [movieStatus]);
 
   useEffect(() => {
-    async function getMovie() {
-      const response = await fetch(`http://localhost:3002/movies/searchById/${tmdbId}`, {
+    async function getMovie() { 
+      const id = localStorage.getItem("id");
+      const response = await fetch(`http://localhost:3002/movies/searchById/${tmdbId}?userId=${id}`, {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
@@ -168,7 +174,7 @@ export default function Movie() {
 
     getMovie(tmdbId);
     fetchRecommendedMovies();
-  }, []);
+  }, [tmdbId]);
 
   useEffect(() => {
     async function getRecommendedMovies() {

@@ -47,7 +47,8 @@ export default function SelectStatus({ token, toast, title, tmdbId, movie, movie
   }
 
   async function changeStatus(status) {
-    const response = await fetch(`http://localhost:3002/users/movies/${movieId}`, {
+    const id = localStorage.getItem("id");
+    const response = await fetch(`http://localhost:3002/users/movies/${movieId}?userId=${id}`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
@@ -79,7 +80,8 @@ export default function SelectStatus({ token, toast, title, tmdbId, movie, movie
   async function deleteMovie() {
     if (movieStatus === "unset") return;
 
-    const response = await fetch(`http://localhost:3002/users/movies/${movieId}`, {
+    const id = localStorage.getItem("id");
+    const response = await fetch(`http://localhost:3002/users/movies/${movieId}?userId=${id}`, {
       method: "DELETE",
       headers: {
         "Content-Type": "application/json",

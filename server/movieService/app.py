@@ -147,16 +147,15 @@ def updateStatus(movieId):
     status = data.get('status')
     rating = data.get('rating')
 
-    if not status or not rating:
-        return jsonify({'error': 'Missing required information'}), 400
-    
     try:
         movie = Movie.query.filter_by(id=movieId, userId=userId).first()
+        print(movie)
         if not movie:
             return jsonify({'error': 'Movie not found'}), 404
-
-        movie.status = status
-        movie.rating = rating
+        if status:
+            movie.status = status
+        if rating:
+            movie.rating = rating
         db.session.commit()
 
         movie_data = {"id": movie.id, "tmdb_id": movie.tmdb_id, "status": movie.status,"rating": movie.rating, "watchedLocation": movie.watchedLocation}
