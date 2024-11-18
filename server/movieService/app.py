@@ -149,7 +149,6 @@ def updateStatus(movieId):
 
     try:
         movie = Movie.query.filter_by(id=movieId, userId=userId).first()
-        print(movie)
         if not movie:
             return jsonify({'error': 'Movie not found'}), 404
         if status:
@@ -162,6 +161,7 @@ def updateStatus(movieId):
 
         return jsonify(movie_data), 200
     except Exception as e:
+        print(e)
         return jsonify({'error': str(e)}), 500
 
 if __name__ == '__main__':

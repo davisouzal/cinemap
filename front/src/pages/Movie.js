@@ -54,8 +54,6 @@ export default function Movie() {
 
     await response.json();
 
-    console.log(await response.json());
-
     if (response.status === 200) {
       toast.current.show({
         severity: "success",
@@ -91,7 +89,6 @@ export default function Movie() {
 
       try {
         const data = await response.json();
-        console.log(data);
         setMovieStatus(data.status);
         setMovieId(data.id);
         setRating(data.rating);
