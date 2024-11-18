@@ -9,7 +9,6 @@ import { FaWandMagicSparkles } from "react-icons/fa6";
 
 import cinemap from "../assets/cinemap.svg";
 import MovieList from "../components/MovieList";
-import { useAuthUser } from "react-auth-kit";
 import Skeleton from "../components/Skeleton";
 
 export default function Explore() {
@@ -19,12 +18,9 @@ export default function Explore() {
   const [exploreMovies, setExploreMovies] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [showTooltip, setShowTooltip] = useState(false);
-  const authUser = useAuthUser();
-
-  const token = authUser().token;
 
   async function getMovieDetails(movie) {
-    const id = movie.tmdbId;
+    const id = movie.tmdb_id;
     const state = movie.status;
     const rating = movie.rating || 0;
 
@@ -79,14 +75,13 @@ export default function Explore() {
 
   useEffect(() => {
     async function getUserMovies() {
-      const moviesReq = await fetch(`http://localhost:3002/users/movies`, {
+      const id = localStorage.getItem("id");
+      const moviesReq = await fetch(`http://localhost:3002/users/movies?userId=${id}`, {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
         },
       });
-
       const movies = await moviesReq.json();
       setUserMovies(movies);
     }
@@ -96,6 +91,7 @@ export default function Explore() {
 
   useEffect(() => {
     async function appendMovieDetails() {
+      console.log(userMovies);
       const detailedMoviesArray = await Promise.all(
         userMovies.map(async (movie) => {
           return await getMovieDetails(movie);
@@ -131,7 +127,6 @@ export default function Explore() {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
         },
       });
 
