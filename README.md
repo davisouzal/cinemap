@@ -66,14 +66,30 @@ docker compose up # adicione a tag -d em caso de querer rodar em segundo plano
 ```
 
 ## Rotas da API
-### 1. Teste de conexão
+### 1. Listar Endpoints de recomendação
 - Rota: /
 - Método: GET
-- Descrição: Retorna uma mensagem simples para verificar se o servidor está funcionando.
+- Descrição: Retorna uma lista de todos os endpoints disponíveis na API, junto com os métodos e suas descrições.
 - Exemplo de Resposta:
 ```
 {
-  "message": "Hello, World!"
+  "endpoints": [
+    {
+      "endpoint": "/",
+      "method": "GET",
+      "description": "get api endpoints, methods and their descriptions"
+    },
+    {
+      "endpoint": "/recommend",
+      "method": "POST",
+      "description": "send movie data to get recommendations of other movies (receive a list of ids from TMDB)"
+    },
+    {
+      "endpoint": "/explore",
+      "method": "POST",
+      "description": "send movies with scores to get recommendations of other movies (receive a list of ids from TMDB)"
+    }
+  ]
 }
 ```
 
@@ -246,3 +262,64 @@ docker compose up # adicione a tag -d em caso de querer rodar em segundo plano
   - **404 Not Found**: Usuário não encontrado.
   - **401 Unauthorized**: Senha incorreta.
   - **500 Internal Server Error**: Erro ao logar.
+
+### 11. Recomendar Filmes a Partir de um Filme
+- Rota: /recommend
+- Método: POST
+- Descrição: Envia dados de um filme para obter recomendações de outros filmes, retornando uma lista de IDs do TMDb.
+- Body:
+```
+{
+  "id": 550,
+  "title": "Fight Club",
+  "genres": ["Drama"],
+  "year": 1999,
+  "rating": 4.5,
+  "state": "watched"
+}
+```
+- Exemplo de Resposta:
+```
+[
+  1234,
+  5678,
+  91011
+]
+```
+
+### 12. Explorar Filmes
+- Rota: /explore
+- Método: POST
+- Descrição: Envia uma lista de filmes com pontuações para obter recomendações de outros filmes, retornando uma lista de IDs do TMDb. A lógica considera o estado e a avaliação dos filmes enviados.
+- Body:
+```
+{
+  "movies": [
+    {
+      "id": 550,
+      "title": "Fight Club",
+      "genres": ["Drama"],
+      "year": 1999,
+      "rating": 4.5,
+      "state": "watched"
+    },
+    {
+      "id": 600,
+      "title": "The Matrix",
+      "genres": ["Action", "Sci-Fi"],
+      "year": 1999,
+      "rating": 4.8,
+      "state": "liked"
+    }
+  ]
+}
+```
+
+- Exemplo de Resposta:
+```
+[
+  2222,
+  3333,
+  4444
+]
+```

@@ -18,10 +18,6 @@ class User(db.Model):
     name = db.Column(db.String(120), nullable=False)
     password = db.Column(db.String(120), nullable=False)
 
-@app.route('/')
-def hello_world():
-    return 'Hello, World!'
-
 @app.route('/users', methods=['GET'])
 def getUsers():
     try:
